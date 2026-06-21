@@ -1,41 +1,38 @@
 package service;
 
 import model.Food;
-import model.Discountable;
 
 public class ShoppingCart {
-    private Food[] items;
+    private final Food[] items;
 
     public ShoppingCart(Food[] items) {
         this.items = items;
     }
 
-    public double getTotalWithoutDiscount() {
-        double total = 0;
+    public double getTotalPriceWithoutDiscount() {
+        double total = 0.0;
         for (Food item : items) {
-            total += item.getTotalPrice();
+            total += item.getAmount() * item.getPrice();
         }
         return total;
     }
 
-    public double getTotalWithDiscount() {
-        double total = 0;
+    public double  getTotalPriceWithDiscount() {
+        double total = 0.0;
         for (Food item : items) {
-            double price = item.getTotalPrice();
-            if (item instanceof Discountable) {
-                double discount = ((Discountable) item).getDiscount();
-                price *= (1 - discount / 100);
-            }
-            total += price;
+            double base = item.getAmount() * item.getPrice();
+            double discountPercent = item.getDiscount();
+            double withDiscount = base * (1.0 - discountPercent / 100.0);
+            total += withDiscount;
         }
         return total;
     }
 
-    public double getTotalVegetarianWithoutDiscount() {
-        double total = 0;
+    public double getVegetarianTotalWithoutDiscount() {
+        double total = 0.0;
         for (Food item : items) {
             if (item.isVegetarian()) {
-                total += item.getTotalPrice();
+                total += item.getAmount() * item.getPrice();
             }
         }
         return total;
