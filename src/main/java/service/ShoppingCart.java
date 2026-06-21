@@ -10,7 +10,6 @@ public class ShoppingCart {
         this.items = items;
     }
 
-    // Получить общую сумму товаров в корзине без скидки
     public double getTotalWithoutDiscount() {
         double total = 0;
         for (Food item : items) {
@@ -19,7 +18,6 @@ public class ShoppingCart {
         return total;
     }
 
-    // Получить общую сумму товаров в корзине со скидкой
     public double getTotalWithDiscount() {
         double total = 0;
         for (Food item : items) {
@@ -33,7 +31,6 @@ public class ShoppingCart {
         return total;
     }
 
-    // Получить общую сумму всех вегетарианских продуктов в корзине без скидки
     public double getTotalVegetarianWithoutDiscount() {
         double total = 0;
         for (Food item : items) {
