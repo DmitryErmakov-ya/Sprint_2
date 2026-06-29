@@ -1,15 +1,24 @@
+import model.Apple;
+import model.Food;
+import model.Meat;
+import model.constants.Colour;
+import service.ShoppingCart;
+
 public class Main {
     public static void main(String[] args) {
-        model.Meat meat = new model.Meat(5, 100);
-        model.Apple redApple = new model.Apple(10, 50, model.constants.Colour.RED);
-        model.Apple greenApple = new model.Apple(8, 60, model.constants.Colour.GREEN);
+        Food meat = new Meat(5, 100.0);
+        Food redApples = new Apple(10, 50.0, Colour.RED);
+        Food greenApples = new Apple(8, 60.0, Colour.GREEN);
 
-        model.Food[] products = {meat, redApple, greenApple};
+        Food[] products = { meat, redApples, greenApples };
+        ShoppingCart cart = new ShoppingCart(products);
 
-        service.ShoppingCart shoppingCart = new service.ShoppingCart(products);
+        double totalWithoutDiscount = cart.getTotalPriceWithoutDiscount();
+        double totalWithDiscount = cart.getTotalPriceWithDiscount();
+        double vegetarianWithoutDiscount = cart.getVegetarianTotalWithoutDiscount();
 
-        System.out.printf("Общая сумма товаров без скидки: %.2f рублей%n", shoppingCart.getTotalWithoutDiscount());
-        System.out.printf("Общая сумма товаров со скидкой: %.2f рублей%n", shoppingCart.getTotalWithDiscount());
-        System.out.printf("Сумма всех вегетарианских продуктов без скидки: %.2f рублей%n", shoppingCart.getTotalVegetarianWithoutDiscount());
+        System.out.println("Общая сумма без скидки: " + totalWithoutDiscount);
+        System.out.println("Общая сумма со скидкой: " + totalWithDiscount);
+        System.out.println("Сумма вегетарианских продуктов без скидки: " + vegetarianWithoutDiscount);
     }
 }
